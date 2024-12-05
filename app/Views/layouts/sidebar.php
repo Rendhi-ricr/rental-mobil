@@ -40,22 +40,22 @@
             <span>Kelola User</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link" href="<?= base_url('admin/mobil') ?>">
             <i class="fas fa-car"></i>
             <span>Kelola Mobil</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link" href="">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Kelola Penyewa</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link" href="<?= base_url('admin/transaksi') ?>">
             <i class="fas fa-receipt"></i>
             <span>Kelola Transaksi</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link" href="">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Pengembalian Mobil</span></a>
     </li>
@@ -140,9 +140,9 @@
     <!-- <hr class="sidebar-divider d-none d-md-block"> -->
 
     <!-- Sidebar Toggler (Sidebar) -->
-    <div class="text-center d-none d-md-inline">
+    <!-- <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
-    </div>
+    </div> -->
 
 
 </ul>
