@@ -15,4 +15,24 @@ class UserModels extends Model
     {
         return $this->where('email', $email)->first();
     }
+
+    public function data_user($id_user)
+    {
+        return $this->find($id_user);
+    }
+
+    public function update_data($data, $id_user)
+    {
+        $query = $this->db->table($this->table)->update(
+            $data,
+            array('id_user' => $id_user)
+        );
+        return $query;
+    }
+
+    public function delete_data($id_user)
+    {
+        $query = $this->db->table($this->table)->delete(array('id_user' => $id_user));
+        return $query;
+    }
 }
