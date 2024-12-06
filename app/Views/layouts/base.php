@@ -20,6 +20,13 @@
     <!-- Custom styles for this template-->
     <link href="<?= base_url() ?>assets/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="<?= base_url() ?>assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <style>
+        .img-preview {
+            max-width: 100%;
+            max-height: 200px;
+            margin-top: 10px;
+        }
+    </style>
 
 </head>
 
@@ -88,6 +95,22 @@
 
     <!-- Page level custom scripts -->
     <script src="<?= base_url() ?>assets/js/demo/datatables-demo.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#gambar').change(function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        $('#preview').attr('src', e.target.result).removeClass('d-none');
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    $('#preview').addClass('d-none').attr('src', '');
+                }
+            });
+        });
+    </script>
 
 </body>
 
