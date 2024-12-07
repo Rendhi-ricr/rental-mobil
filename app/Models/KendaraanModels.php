@@ -10,23 +10,23 @@ class KendaraanModels extends Model
     protected $primaryKey = 'id_kendaraan';
     protected $allowedFields = ['nama_kendaraan', 'nomber_kendaraan', 'tipe_kendaraan', 'harga_perhari', 'gambar'];
 
-    public function data_user($id_user)
+    public function data_kendaraan($id_kendaraan)
     {
-        return $this->find($id_user);
+        return $this->find($id_kendaraan);
     }
 
-    public function update_data($data, $id_user)
+    public function update_data($data, $id_kendaraan)
     {
         $query = $this->db->table($this->table)->update(
             $data,
-            array('id_user' => $id_user)
+            array('id_kendaraan' => $id_kendaraan)
         );
         return $query;
     }
 
-    public function delete_data($id_user)
+    public function delete_data($id_kendaraan)
     {
-        $query = $this->db->table($this->table)->delete(array('id_user' => $id_user));
+        $query = $this->db->table($this->table)->delete(array('id_kendaraan' => $id_kendaraan));
         return $query;
     }
 }

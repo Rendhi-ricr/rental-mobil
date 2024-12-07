@@ -50,8 +50,8 @@
                                 <td><?= $m['harga_perhari']; ?></td>
                                 <td><img src="<?= base_url('img/kendaraan/' . $m['gambar']) ?>" alt="Toyota Avanza" style="width: 200px; heigh:10px;"></td>
                                 <td>
-                                    <button>Edit</button>
-                                    <button>Hapus</button>
+                                    <a href="<?= base_url('admin/mobil/edit/' . $m['id_kendaraan']) ?>" class="btn btn-warning"><i class="fa fa-edit me-2"></i>Edit</a>
+                                    <a href="<?= base_url('admin/mobil/delete/' . $m['id_kendaraan']) ?>" class="btn btn-danger"><i class="fa fa-trash me-2"></i>Hapus</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
