@@ -35,8 +35,12 @@ class Auth extends BaseController
                     'isLoggedIn' => true
                 ]);
 
-                // Redirect ke halaman dashboard
-                return redirect()->to('/admin');
+                // Cek role dan arahkan ke halaman yang sesuai
+                if ($user['role'] === 'admin') {
+                    return redirect()->to('/admin'); // Halaman dashboard untuk admin
+                } elseif ($user['role'] === 'pelanggan') {
+                    return redirect()->to('/home'); // Halaman home untuk pelanggan
+                }
             } else {
                 // Password salah
                 return redirect()->back()->with('error', 'Password salah');
@@ -46,6 +50,7 @@ class Auth extends BaseController
             return redirect()->back()->with('error', 'Email tidak ditemukan');
         }
     }
+
 
     public function tambah()
     {
@@ -62,7 +67,7 @@ class Auth extends BaseController
             'nama'     => $this->request->getPost('nama'),
             'email'    => $this->request->getPost('email'),
             'password' => $this->request->getPost('password'),
-            'role'     => 1, // Default role
+            'role'     => 2, // Default role
         ];
 
         // Validasi password dan confirm password
@@ -83,54 +88,6 @@ class Auth extends BaseController
             return redirect()->back()->withInput()->with('error', implode(', ', $errors));
         }
     }
-
-    // public function register()
-    // {
-    //     // Ambil data dari form registrasi
-    //     $data = [
-    //         'nama_lengkap' => $this->request->getPost('nama_lengkap'),
-    //         'email' => $this->request->getPost('email'),
-    //         'fakultas' => $this->request->getPost('fakultas'),
-    //         'no_hp' => $this->request->getPost('no_hp'),
-    //         'password' => $this->request->getPost('password'),
-    //         'confirm_password' => $this->request->getPost('confirm_password'),
-    //         'level' => 'mahasiswa' // Set level otomatis sebagai 'mahasiswa'
-    //     ];
-
-    //     // Validasi password dan confirm password
-    //     if ($data['password'] !== $data['confirm_password']) {
-    //         return redirect()->back()->with('error', 'Password dan konfirmasi password tidak cocok');
-    //     }
-
-    //     // Enkripsi password
-    //     $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
-    //     unset($data['confirm_password']); // Hapus confirm_password dari data yang akan disimpan
-
-    //     // Simpan data ke dalam database
-    //     $userModel = new UserModel();
-    //     $userModel->save($data);
-
-    //     // Redirect ke halaman login dengan pesan sukses
-    //     return redirect()->to('/login')->with('success', 'Registrasi berhasil. Silakan login.');
-    // }
-
-
-    // public function dashboard()
-    // {
-    //     // Cek apakah user sudah login
-    //     $session = session();
-    //     if (!$session->get('isLoggedIn')) {
-    //         // Jika belum login, redirect ke halaman login
-    //         return redirect()->to('login');
-    //     }
-
-    //     // Ambil data user dari session
-    //     $data['nama_lengkap'] = $session->get('nama_lengkap');
-    //     $data['level'] = $session->get('level');
-
-    //     // Tampilkan halaman dashboard
-    //     return view('dashboard', $data);
-    // }
 
     public function logout()
     {

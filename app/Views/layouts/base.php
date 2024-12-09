@@ -10,9 +10,7 @@
     <meta name="author" content="">
 
     <title><?= $this->renderSection('title') ?></title>
-    <link rel="shortcut icon" href="<?= base_url() ?>
-    
-    img/logo.png" />
+    <link rel="shortcut icon" href="<?= base_url('img / logo . png') ?>" />
     <!-- Custom fonts for this template-->
     <link href="<?= base_url() ?>assets/plugins/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link

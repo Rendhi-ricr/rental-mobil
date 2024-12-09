@@ -2,10 +2,23 @@
 
 namespace App\Controllers;
 
+use App\Models\KendaraanModels;
+
 class Home extends BaseController
 {
-    public function index(): string
+    protected $mobil;
+
+    public function __construct()
     {
-        return view('welcome_message');
+        $this->mobil = new KendaraanModels();
+    }
+
+    public function index()
+    {
+        $mobil = $this->mobil->findAll();
+        $data = [
+            'mobil' => $mobil
+        ];
+        return view('frontend/home', $data);
     }
 }
