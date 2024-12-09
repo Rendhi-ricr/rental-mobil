@@ -17,7 +17,8 @@ class Home extends BaseController
     {
         $mobil = $this->mobil->findAll();
         $data = [
-            'mobil' => $mobil
+            'mobil' => $mobil,
+            'isLoggedIn' => session()->has('id_user')
         ];
         return view('frontend/home', $data);
     }

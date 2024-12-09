@@ -9,12 +9,12 @@
                 <!-- Nama -->
                 <div class="mb-3">
                     <label for="name" class="form-label">Nama</label>
-                    <input type="text" class="form-control" id="name" placeholder="Tulis namamu...">
+                    <input type="text" class="form-control" id="name" value="<?= $nama ?>" readonly>
                 </div>
                 <!-- Alamat -->
                 <div class="mb-3">
                     <label for="address" class="form-label">Alamat</label>
-                    <input type="text" class="form-control" id="address" placeholder="Alamat..">
+                    <input type="text" class="form-control" id="address" value="<?= $alamat ?>" readonly>
                 </div>
                 <!-- Tanggal Mulai Sewa -->
                 <div class="mb-3">
@@ -29,10 +29,11 @@
                 <!-- Pilih Mobil -->
                 <div class="mb-3">
                     <label for="car" class="form-label">Pilih Mobil</label>
-                    <select class="form-select" id="car">
-                        <option selected>BMW M3</option>
-                        <option>Lexus CT200H</option>
-                        <option>Audi R8</option>
+                    <select name="car" class="form-select" id="car">
+                        <option value="">Pilih Mobil</option>
+                        <?php foreach ($mobil as $m) : ?>
+                            <option value="<?= $m['nama_kendaraan']; ?>"><?= $m['nama_kendaraan']; ?></option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
                 <!-- Tombol Submit -->

@@ -10,22 +10,37 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- Navbar Items -->
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#tentang-kami">Tentang Kami</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#daftar-mobil">Daftar Mobil</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#histori-transaksi">Histori Transaksi</a>
-                </li>
+                <?php if (session()->get('isLoggedIn')): ?>
+                    <!-- Menu untuk User yang Sudah Login -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#tentang-kami">Tentang Kami</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#daftar-mobil">Daftar Mobil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#histori-transaksi">Histori Transaksi</a>
+                    </li>
+                <?php else: ?>
+                    <!-- Menu Default untuk User yang Belum Login -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#tentang-kami">Tentang Kami</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#daftar-mobil">Daftar Mobil</a>
+                    </li>
+                <?php endif; ?>
             </ul>
-            <!-- Login Button -->
+
+            <!-- Tombol Login/Logout -->
             <div>
-                <a href="<?= base_url('auth') ?>" class="btn btn-primary">Login</a>
+                <?php if (session()->get('isLoggedIn')): ?>
+                    <a href="<?= base_url('auth/logout') ?>" class="btn btn-primary">Logout</a>
+                <?php else: ?>
+                    <a href="<?= base_url('auth') ?>" class="btn btn-primary">Login</a>
+                <?php endif; ?>
             </div>
         </div>
     </div>

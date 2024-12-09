@@ -29,20 +29,27 @@
                 <p class="text-muted">Kami menghadirkan mobil-mobil populer yang disewa oleh pelanggan untuk memaksimalkan kenyamanan Anda dalam perjalanan jauh.</p>
             </div>
             <div class="row">
-                <?php
-                foreach ($mobil as $m) : ?>
-                    <!-- Card 1 -->
+                <?php foreach ($mobil as $m) : ?>
                     <div class="col-md-4 mb-4">
                         <div class="card text-center">
                             <img src="<?= base_url('img/kendaraan/' . $m['gambar']) ?>" alt="<?= $m['nama_kendaraan'] ?>">
                             <div class="card-body">
                                 <h5 class="card-title fw-bold"><?= $m['nama_kendaraan']; ?></h5>
                                 <p class="text-primary fw-bold mb-1">Rp <?= $m['harga_perhari']; ?><span class="text-muted fw-normal">/Hari</span></p>
-                                <a href="<?= base_url('booking') ?>" class="btn btn-primary w-100">Sewa sekarang</a>
+                                <button
+                                    class="btn btn-primary w-100 btn-sewa"
+                                    data-is-logged-in="<?= $isLoggedIn ? 'true' : 'false' ?>"
+                                    data-login-url="<?= base_url('auth') ?>"
+                                    data-booking-url="<?= base_url('booking') ?>">
+                                    Sewa sekarang
+                                </button>
+
                             </div>
                         </div>
                     </div>
                 <?php endforeach; ?>
+
+
             </div>
         </section>
 
