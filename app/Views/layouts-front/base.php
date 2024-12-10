@@ -35,6 +35,7 @@
                 const isLoggedIn = this.getAttribute('data-is-logged-in') === 'true';
                 const loginUrl = this.getAttribute('data-login-url'); // URL login ke auth
                 const bookingUrl = this.getAttribute('data-booking-url'); // URL booking
+                const idKendaraan = this.getAttribute('data-id-kendaraan'); // ID kendaraan yang dipilih
 
                 if (!isLoggedIn) {
                     // Jika user belum login, tampilkan SweetAlert
@@ -53,7 +54,7 @@
                     });
                 } else {
                     // Jika user sudah login, arahkan ke halaman booking
-                    window.location.href = bookingUrl;
+                    window.location.href = `${bookingUrl}?id_kendaraan=${idKendaraan}`;
                 }
             });
         });

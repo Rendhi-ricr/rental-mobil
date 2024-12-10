@@ -40,7 +40,9 @@
                                     class="btn btn-primary w-100 btn-sewa"
                                     data-is-logged-in="<?= $isLoggedIn ? 'true' : 'false' ?>"
                                     data-login-url="<?= base_url('auth') ?>"
-                                    data-booking-url="<?= base_url('booking') ?>">
+                                    data-booking-url="<?= base_url('booking') ?>"
+                                    data-id-kendaraan="<?= $m['id_kendaraan']; ?>">
+
                                     Sewa sekarang
                                 </button>
 
