@@ -44,11 +44,11 @@
             <i class="fas fa-car"></i>
             <span>Kelola Mobil</span></a>
     </li>
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link" href="">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Kelola Penyewa</span></a>
-    </li>
+    </li> -->
     <li class="nav-item">
         <a class="nav-link" href="<?= base_url('admin/transaksi') ?>">
             <i class="fas fa-receipt"></i>
@@ -57,7 +57,7 @@
     <li class="nav-item">
         <a class="nav-link" href="">
             <i class="fas fa-fw fa-chart-area"></i>
-            <span>Pengembalian Mobil</span></a>
+            <span>Histori Transaksi</span></a>
     </li>
     <!-- <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"

@@ -21,7 +21,7 @@
                                 Jumlah Mobil
                             </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                200 Unit
+                                <?= $mobil ?>
                             </div>
                         </div>
                         <div class="col-auto">
@@ -41,7 +41,7 @@
                                 Total Sewa
                             </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                100
+                                <?= $transaksi ?>
                             </div>
                         </div>
                         <div class="col-auto">
@@ -61,7 +61,7 @@
                                 Total User
                             </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                50
+                                <?= $user ?>
                             </div>
                         </div>
                         <div class="col-auto">
