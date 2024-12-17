@@ -6,8 +6,9 @@
         <div class="alert alert-success" role="alert">
             <?= session()->getFlashdata('success') ?>
         </div>
+    <?php elseif (session()->getFlashdata('error')): ?>
+        <div class="alert alert-danger"><?= session()->getFlashdata('error') ?></div>
     <?php endif; ?>
-
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Kelola Data Transaksi</h1>
@@ -67,7 +68,9 @@
                                     </td>
                                 <?php elseif ($value->keterangan === 'Mobil Sudah Diambil'): ?>
                                     <td>
-                                        <button class="btn btn-primary btn-sm">Selesai</button>
+                                        <a href="javascript:void(0);" onclick="selesai('<?= $value->id_transaksi ?>')" class="btn btn-success btn-sm">
+                                            Selesai
+                                        </a>
                                     </td>
                                 <?php endif; ?>
 
@@ -94,6 +97,23 @@
             if (result.isConfirmed) {
                 // Redirect ke URL aksi Acc
                 window.location.href = "<?= base_url('admin/transaksi/acc/') ?>" + id;
+            }
+        })
+    }
+
+    function selesai(id) {
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: "Data transaksi diselesaikan!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Selesaikan sekarang!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Redirect ke URL aksi Acc
+                window.location.href = "<?= base_url('admin/transaksi/selesaiTransaksi/') ?>" + id;
             }
         })
     }

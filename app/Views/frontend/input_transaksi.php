@@ -68,18 +68,23 @@
         const totalPrice = document.getElementById("totalPrice");
         const penaltyFee = document.getElementById("penaltyFee");
 
-        // Format angka ke Rupiah
+        // Format angka ke dalam bentuk Rupiah
         function formatRupiah(angka) {
             return new Intl.NumberFormat("id-ID", {
                 style: "currency",
                 currency: "IDR",
-                minimumFractionDigits: 0
+                minimumFractionDigits: 0,
             }).format(angka);
+        }
+
+        // Hapus format Rupiah ke angka murni
+        function parseRupiahToNumber(value) {
+            return parseInt(value.replace(/[^0-9]/g, ""), 10) || 0;
         }
 
         // Hitung total harga sewa
         function calculateTotal() {
-            const hargaPerhari = carSelect.selectedOptions[0]?.getAttribute("data-harga") || 0;
+            const hargaPerhari = parseInt(carSelect.selectedOptions[0]?.getAttribute("data-harga") || 0, 10);
             const tglMulai = startDate.value ? new Date(startDate.value) : null;
             const tglAkhir = endDate.value ? new Date(endDate.value) : null;
 
@@ -89,14 +94,16 @@
             }
 
             const diffTime = Math.abs(tglAkhir - tglMulai);
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1; // Hari dihitung termasuk hari mulai
             const total = diffDays * hargaPerhari;
-            totalPrice.value = formatRupiah(total);
+
+            totalPrice.value = formatRupiah(total); // Format ke Rupiah untuk tampilan
+            totalPrice.dataset.rawValue = total; // Simpan nilai mentah untuk dikirim ke server
         }
 
         // Hitung denda berdasarkan harga mobil
         function calculatePenalty() {
-            const hargaPerhari = carSelect.selectedOptions[0]?.getAttribute("data-harga") || 0;
+            const hargaPerhari = parseInt(carSelect.selectedOptions[0]?.getAttribute("data-harga") || 0, 10);
             let denda = 0;
 
             if (hargaPerhari < 1000000) {
@@ -107,7 +114,13 @@
                 denda = 500000;
             }
 
-            penaltyFee.value = formatRupiah(denda);
+            penaltyFee.value = formatRupiah(denda); // Format ke Rupiah untuk tampilan
+            penaltyFee.dataset.rawValue = denda; // Simpan nilai mentah untuk dikirim ke server
+        }
+
+        // Trigger calculations on page load if a car is pre-selected
+        if (carSelect.value) {
+            calculatePenalty();
         }
 
         // Event listeners
@@ -116,6 +129,12 @@
         carSelect.addEventListener("change", function() {
             calculateTotal();
             calculatePenalty();
+        });
+
+        // Pastikan data yang dikirim adalah angka mentah
+        document.querySelector("form").addEventListener("submit", function() {
+            totalPrice.value = totalPrice.dataset.rawValue || 0; // Kirim nilai mentah
+            penaltyFee.value = penaltyFee.dataset.rawValue || 0; // Kirim nilai mentah
         });
     });
 </script>

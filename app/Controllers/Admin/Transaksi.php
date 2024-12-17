@@ -4,14 +4,17 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use App\Models\TransaksiModels;
+use App\Models\HistoriTransaksiModels;
 
 class Transaksi extends BaseController
 {
-    protected $transaksi;
+    protected $transaksi,
+        $histori;
 
     public function __construct()
     {
         $this->transaksi = new TransaksiModels();
+        $this->histori = new HistoriTransaksiModels();
     }
 
     public function index()
@@ -31,5 +34,40 @@ class Transaksi extends BaseController
 
         // Redirect kembali ke halaman transaksi dengan pesan sukses
         return redirect()->to(base_url('admin/transaksi'))->with('success', 'Transaksi berhasil di-ACC.');
+    }
+
+    public function selesaiTransaksi($id_transaksi)
+    {
+
+        // Ambil data transaksi berdasarkan id_transaksi
+        $transaksi = $this->transaksi->find($id_transaksi);
+
+        if (!$transaksi) {
+            return redirect()->back()->with('error', 'Data transaksi tidak ditemukan!');
+        }
+
+        // Hitung tanggal dikembalikan dan keterlambatan
+        $tanggalDikembalikan = date('Y-m-d');
+        $tanggalAkhirSewa = $transaksi['tglsewa_akhir'];
+        $diff = strtotime($tanggalDikembalikan) - strtotime($tanggalAkhirSewa);
+        $telatHari = ($diff > 0) ? floor($diff / (60 * 60 * 24)) : 0;
+
+        // Hitung total denda
+        $dendaPerHari = $transaksi['denda']; // Pastikan kolom denda ada di tabel transaksi
+        $totalDenda = $telatHari * $dendaPerHari;
+
+        // Masukkan data ke tabel_histori_transaksi
+        $historiData = [
+            'id_transaksi' => $transaksi['id_transaksi'],
+            'tanggal_dikembalikan' => $tanggalDikembalikan,
+            'telat_hari' => $telatHari,
+            'total_denda' => $totalDenda,
+        ];
+        $this->histori->insert($historiData);
+
+        // Hapus data dari tabel transaksi
+        $this->transaksi->delete($id_transaksi);
+
+        return redirect()->back()->with('success', 'Transaksi berhasil diselesaikan dan dipindahkan ke histori!');
     }
 }

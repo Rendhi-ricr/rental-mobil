@@ -21,22 +21,24 @@ class Booking extends BaseController
 
     public function index()
     {
-        $id_kendaraan = $this->request->getGet('id_kendaraan'); // Ambil ID kendaraan dari URL
+        $id_kendaraan = $this->request->getGet('id_kendaraan'); // Ambil id_kendaraan dari query string
+
+        // Ambil data mobil dari database
         $mobil = $this->mobil->findAll();
-        $nama = session()->get('nama');
 
-        // Cari data kendaraan berdasarkan ID jika ada
-        $selectedMobil = $id_kendaraan ? $this->mobil->find($id_kendaraan) : null;
+        // Cek apakah id_kendaraan ada dan valid
+        $selectedMobil = null;
+        if ($id_kendaraan) {
+            $selectedMobil = $this->mobil->find($id_kendaraan);
+        }
 
-        $data = [
+        // Kirim data ke view
+        return view('frontend/input_transaksi', [
             'mobil' => $mobil,
-            'nama' => $nama,
-            'selectedMobil' => $selectedMobil // Kirim data kendaraan terpilih ke view
-        ];
-
-        return view('frontend/input_transaksi', $data);
+            'selectedMobil' => $selectedMobil,
+            'nama' => session()->get('nama'),
+        ]);
     }
-
 
     public function simpan()
     {
