@@ -8,7 +8,7 @@ class UserModels extends Model
 {
     protected $table = 'tabel_user';
     protected $primaryKey = 'id_user';
-    protected $allowedFields = ['nama', 'email', 'password', 'role'];
+    protected $allowedFields = ['nama', 'email', 'no_hp', 'alamat', 'password', 'role'];
 
     // Fungsi untuk mendapatkan data user berdasarkan email
     public function getUserByEmail($email)

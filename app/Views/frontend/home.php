@@ -3,7 +3,14 @@
 <?= $this->section('content') ?>
 
 <section class="py-5">
+    <!-- Notification Selamat Datang -->
+    <?php if (session()->getFlashdata('welcome')): ?>
+        <div class="alert alert-success text-center" role="alert">
+            <?= session()->getFlashdata('welcome') ?>
+        </div>
+    <?php endif; ?>
     <div class="container">
+
         <section class="container py-5">
             <div class="row align-items-center">
                 <div class="col-md-6">
@@ -35,7 +42,7 @@
                             <img src="<?= base_url('img/kendaraan/' . $m['gambar']) ?>" alt="<?= $m['nama_kendaraan'] ?>">
                             <div class="card-body">
                                 <h5 class="card-title fw-bold"><?= $m['nama_kendaraan']; ?></h5>
-                                <p class="text-primary fw-bold mb-1">Rp <?= $m['harga_perhari']; ?><span class="text-muted fw-normal">/Hari</span></p>
+                                <p class="text-primary fw-bold mb-1">Rp <?= number_format($m['harga_perhari'], 0, ',', '.'); ?><span class="text-muted fw-normal">/Hari</span></p>
                                 <button
                                     class="btn btn-primary w-100 btn-sewa"
                                     data-is-logged-in="<?= $isLoggedIn ? 'true' : 'false' ?>"

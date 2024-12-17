@@ -50,8 +50,13 @@
                             <input type="text" class="form-control" id="nomor_kendaraan" name="nomor_kendaraan" placeholder="Masukkan nomor kendaraan">
                         </div>
                         <div class="form-group">
-                            <label for="tipe_kendaraan">Tipe Kendaraan</label>
-                            <input type="text" class="form-control" id="tipe_kendaraan" name="tipe_kendaraan" placeholder="Masukkan tipe kendaraan">
+                            <label for="tipe_kendaraan">Kategori</label>
+                            <select name="tipe_kendaraan" class="form-control" id="tipe_kendaraan">
+                                <option value="">Pilih Tipe Mobil</option>
+                                <option value="Mobil SUV">Mobil SUV</option>
+                                <option value="Mobil MPV">Mobil MPV</option>
+                                <option value="Mobil Crossover">Mobil Crossover</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="harga_perhari">Harga Per Hari (Rp)</label>

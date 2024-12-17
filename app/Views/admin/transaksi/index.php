@@ -41,18 +41,18 @@
                     </tfoot>
                     <tbody>
                         <?php
-                        $no = 1;
-                        foreach ($transaksi as $key => $value) :
+                        $no = 1; // Inisialisasi nomor
+                        foreach ($transaksi as $key => $value) : // Loop data transaksi
                         ?>
                             <tr>
                                 <td><?= $no++ ?></td>
                                 <td><?= $value->nama ?></td>
                                 <td><?= $value->nama_kendaraan ?></td>
-                                <td><?= $value->tglsewa_mulai ?></td>
-                                <td><?= $value->tglsewa_akhir ?></td>
-                                <td><?= $value->total_harga ?></td>
+                                <td><?= date('d-m-Y', strtotime($value->tglsewa_mulai)) ?></td>
+                                <td><?= date('d-m-Y', strtotime($value->tglsewa_akhir)) ?></td>
+                                <td>Rp <?= number_format($value->total_harga, 0, ',', '.'); ?></td>
                                 <td>
-                                    <button>Selesai</button>
+                                    <button class="btn btn-success btn-sm">Selesai</button>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

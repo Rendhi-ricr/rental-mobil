@@ -36,6 +36,8 @@ class Auth extends BaseController
                     'isLoggedIn' => true
                 ]);
 
+                $session->setFlashdata('welcome', 'Selamat Datang, ' . $user['nama']);
+
                 // Cek role dan arahkan ke halaman yang sesuai
                 if ($user['role'] === 'admin') {
                     return redirect()->to('/admin'); // Halaman dashboard untuk admin

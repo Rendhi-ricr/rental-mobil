@@ -47,7 +47,7 @@
                                 <td><?= $m['nama_kendaraan']; ?></td>
                                 <td><?= $m['nomber_kendaraan']; ?></td>
                                 <td><?= $m['tipe_kendaraan']; ?></td>
-                                <td><?= $m['harga_perhari']; ?></td>
+                                <td>Rp <?= number_format($m['harga_perhari'], 0, ',', '.'); ?></td>
                                 <td><img src="<?= base_url('img/kendaraan/' . $m['gambar']) ?>" alt="Toyota Avanza" style="width: 200px; heigh:10px;"></td>
                                 <td>
                                     <a href="<?= base_url('admin/mobil/edit/' . $m['id_kendaraan']) ?>" class="btn btn-warning"><i class="fa fa-edit me-2"></i>Edit</a>

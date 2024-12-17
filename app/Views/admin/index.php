@@ -2,7 +2,12 @@
 <?= $this->section('title') ?>Dashboard<?= $this->endSection() ?>
 <?= $this->section('content') ?>
 <div class="container-fluid">
-
+    <!-- Notification Selamat Datang -->
+    <?php if (session()->getFlashdata('welcome')): ?>
+        <div class="alert alert-success" role="alert">
+            <?= session()->getFlashdata('welcome') ?>
+        </div>
+    <?php endif; ?>
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>

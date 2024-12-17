@@ -37,7 +37,7 @@ class Mobil extends BaseController
         // Validasi input
         $validation = $this->validate([
             'nama_kendaraan' => 'required|min_length[3]',
-            'nomor_kendaraan' => 'required|alpha_numeric',
+            'nomor_kendaraan' => 'required',
             'tipe_kendaraan' => 'required|min_length[3]',
             'harga_perhari' => 'required|numeric',
             'gambar' => 'uploaded[gambar]|is_image[gambar]|max_size[gambar,2048]', // Validasi untuk file gambar
@@ -88,7 +88,7 @@ class Mobil extends BaseController
         // Validasi input
         $validation = $this->validate([
             'nama_kendaraan' => 'required|min_length[3]',
-            'nomor_kendaraan' => 'required|alpha_numeric',
+            'nomor_kendaraan' => 'required',
             'tipe_kendaraan' => 'required|min_length[3]',
             'harga_perhari' => 'required|numeric',
             'gambar' => 'if_exist|is_image[gambar]|max_size[gambar,2048]', // Validasi untuk file gambar
@@ -116,7 +116,7 @@ class Mobil extends BaseController
         // Update data ke database
         $data = [
             'nama_kendaraan' => $this->request->getPost('nama_kendaraan'),
-            'nomor_kendaraan' => $this->request->getPost('nomor_kendaraan'),
+            'nomber_kendaraan' => $this->request->getPost('nomor_kendaraan'),
             'tipe_kendaraan' => $this->request->getPost('tipe_kendaraan'),
             'harga_perhari' => $this->request->getPost('harga_perhari'),
             'gambar' => $namaGambar,
