@@ -52,8 +52,7 @@
                                 <td><?= $value->tglsewa_akhir ?></td>
                                 <td><?= $value->total_harga ?></td>
                                 <td>
-                                    <button>Edit</button>
-                                    <button>Hapus</button>
+                                    <button>Selesai</button>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

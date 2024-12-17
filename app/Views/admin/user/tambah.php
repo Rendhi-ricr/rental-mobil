@@ -64,7 +64,7 @@
                             <select name="role" id="role" class="form-control">
                                 <option value="" selected>Pilih Role</option>
                                 <option <?= (old('role') == 'admin') ? 'selected' : '' ?> value="admin">Admin</option>
-                                <option <?= (old('role') == 'penyewa') ? 'selected' : '' ?> value="penyewa">Penyewa</option>
+                                <option <?= (old('role') == 'pelanggan') ? 'selected' : '' ?> value="pelanggan">Pelanggan</option>
                             </select>
                         </div>
                     </div>
