@@ -45,7 +45,8 @@ class Booking extends BaseController
             'id_kendaraan' => 'required',
             'tglsewa_mulai' => 'required|valid_date',
             'tglsewa_akhir' => 'required|valid_date',
-            'alamat' => 'required'
+            'alamat' => 'required',
+            'denda' => 'required'
         ])) {
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
@@ -56,6 +57,7 @@ class Booking extends BaseController
         $tglsewa_mulai = $this->request->getPost('tglsewa_mulai');
         $tglsewa_akhir = $this->request->getPost('tglsewa_akhir');
         $alamat = $this->request->getPost('alamat'); // Ambil alamat dari form input
+        $denda = $this->request->getPost('denda'); // Ambil alamat dari form input
 
         // Ambil data kendaraan berdasarkan id_kendaraan
         $kendaraan = $this->mobil->find($id_kendaraan);
@@ -70,7 +72,6 @@ class Booking extends BaseController
 
         // Hitung total harga
         $total_harga = $harga_perhari * $selisih_hari;
-
         // Simpan transaksi ke database
         $this->transaksi->insert([
             'id_user' => $id_user,
@@ -78,6 +79,7 @@ class Booking extends BaseController
             'tglsewa_mulai' => $tglsewa_mulai,
             'tglsewa_akhir' => $tglsewa_akhir,
             'total_harga' => str_replace(['Rp', '.', ','], '', $total_harga),
+            'denda' => $denda,
             'keterangan' => 'Mobil Belum Diambil',
         ]);
 

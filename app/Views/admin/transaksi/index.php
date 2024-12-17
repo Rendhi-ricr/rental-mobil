@@ -2,6 +2,11 @@
 <?= $this->section('title') ?>Kelola Transaksi<?= $this->endSection() ?>
 <?= $this->section('content') ?>
 <div class="container-fluid">
+    <?php if (session()->getFlashdata('success')): ?>
+        <div class="alert alert-success" role="alert">
+            <?= session()->getFlashdata('success') ?>
+        </div>
+    <?php endif; ?>
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -25,6 +30,7 @@
                             <th>Tanggal Sewa</th>
                             <th>Tanggal Akhir Sewa</th>
                             <th>Total Harga (Rp)</th>
+                            <th>Keterangan</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -36,6 +42,7 @@
                             <th>Tanggal Sewa</th>
                             <th>Tanggal Akhir Sewa</th>
                             <th>Total Harga (Rp)</th>
+                            <th>Keterangan</th>
                             <th>Aksi</th>
                         </tr>
                     </tfoot>
@@ -51,9 +58,19 @@
                                 <td><?= date('d-m-Y', strtotime($value->tglsewa_mulai)) ?></td>
                                 <td><?= date('d-m-Y', strtotime($value->tglsewa_akhir)) ?></td>
                                 <td>Rp <?= number_format($value->total_harga, 0, ',', '.'); ?></td>
-                                <td>
-                                    <button class="btn btn-success btn-sm">Selesai</button>
-                                </td>
+                                <td><?= $value->keterangan ?></td>
+                                <?php if ($value->keterangan === 'Mobil Belum Diambil'): ?>
+                                    <td>
+                                        <a href="javascript:void(0);" onclick="confirmAcc('<?= $value->id_transaksi ?>')" class="btn btn-success btn-sm">
+                                            Acc
+                                        </a>
+                                    </td>
+                                <?php elseif ($value->keterangan === 'Mobil Sudah Diambil'): ?>
+                                    <td>
+                                        <button class="btn btn-primary btn-sm">Selesai</button>
+                                    </td>
+                                <?php endif; ?>
+
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -62,5 +79,24 @@
         </div>
     </div>
 </div>
+
+<script>
+    function confirmAcc(id) {
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: "Data transaksi akan di-ACC!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, ACC sekarang!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Redirect ke URL aksi Acc
+                window.location.href = "<?= base_url('admin/transaksi/acc/') ?>" + id;
+            }
+        })
+    }
+</script>
 
 <?= $this->endSection() ?>

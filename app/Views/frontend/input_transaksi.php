@@ -46,6 +46,11 @@
                     <label for="totalPrice" class="form-label">Total Harga</label>
                     <input type="text" class="form-control" id="totalPrice" name="total_harga" readonly>
                 </div>
+                <!-- Denda -->
+                <div class="mb-3">
+                    <label for="penaltyFee" class="form-label">Denda</label>
+                    <input type="text" class="form-control" id="penaltyFee" name="denda" readonly>
+                </div>
                 <!-- Tombol Submit -->
                 <div class="d-grid">
                     <button type="submit" class="btn btn-primary">Sewa Sekarang</button>
@@ -61,8 +66,9 @@
         const endDate = document.getElementById("endDate");
         const carSelect = document.getElementById("car");
         const totalPrice = document.getElementById("totalPrice");
-        const formTransaksi = document.getElementById("formTransaksi");
+        const penaltyFee = document.getElementById("penaltyFee");
 
+        // Format angka ke Rupiah
         function formatRupiah(angka) {
             return new Intl.NumberFormat("id-ID", {
                 style: "currency",
@@ -71,60 +77,46 @@
             }).format(angka);
         }
 
+        // Hitung total harga sewa
         function calculateTotal() {
             const hargaPerhari = carSelect.selectedOptions[0]?.getAttribute("data-harga") || 0;
             const tglMulai = startDate.value ? new Date(startDate.value) : null;
             const tglAkhir = endDate.value ? new Date(endDate.value) : null;
 
-            if (!tglMulai || !tglAkhir) {
+            if (!tglMulai || !tglAkhir || tglMulai > tglAkhir) {
                 totalPrice.value = "";
                 return;
             }
 
-            if (tglMulai <= tglAkhir) {
-                const diffTime = Math.abs(tglAkhir - tglMulai);
-                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
-                const total = diffDays * hargaPerhari;
-                totalPrice.value = formatRupiah(total);
-            } else {
-                totalPrice.value = "";
-            }
+            const diffTime = Math.abs(tglAkhir - tglMulai);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+            const total = diffDays * hargaPerhari;
+            totalPrice.value = formatRupiah(total);
         }
 
+        // Hitung denda berdasarkan harga mobil
+        function calculatePenalty() {
+            const hargaPerhari = carSelect.selectedOptions[0]?.getAttribute("data-harga") || 0;
+            let denda = 0;
+
+            if (hargaPerhari < 1000000) {
+                denda = 100000;
+            } else if (hargaPerhari < 2000000) {
+                denda = 300000;
+            } else if (hargaPerhari < 5000000) {
+                denda = 500000;
+            }
+
+            penaltyFee.value = formatRupiah(denda);
+        }
+
+        // Event listeners
         startDate.addEventListener("change", calculateTotal);
         endDate.addEventListener("change", calculateTotal);
-        carSelect.addEventListener("change", calculateTotal);
-
-        // Event listener untuk form submission
-        // formTransaksi.addEventListener("submit", function(event) {
-        //     event.preventDefault(); // Mencegah submit form default
-
-        //     // Ambil data untuk WhatsApp
-        //     const nama = document.getElementById("name").value;
-        //     const alamat = document.getElementById("address").value;
-        //     const tglMulai = startDate.value;
-        //     const tglAkhir = endDate.value;
-        //     const mobil = carSelect.selectedOptions[0]?.text || "";
-        //     const total = totalPrice.value;
-
-        //     // Tampilkan SweetAlert
-        //     Swal.fire({
-        //         title: "Sukses!",
-        //         text: "Transaksi berhasil, ingin melanjutkan ke WhatsApp?",
-        //         icon: "success",
-        //         showCancelButton: true,
-        //         confirmButtonText: "Ya, Lanjutkan",
-        //         cancelButtonText: "Tidak",
-        //     }).then((result) => {
-        //         if (result.isConfirmed) {
-        //             const waLink = `https://wa.me/6285222258509`;
-
-        //             // Arahkan ke WhatsApp
-        //             window.location.href = waLink;
-        //         }
-        //     });
-        // });
+        carSelect.addEventListener("change", function() {
+            calculateTotal();
+            calculatePenalty();
+        });
     });
 </script>
-
 <?= $this->endSection() ?>
