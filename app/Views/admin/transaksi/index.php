@@ -12,8 +12,6 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Kelola Data Transaksi</h1>
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                class="fas fa-plus fa-sm text-white-500"></i> Tambah</a>
     </div>
 
     <div class="card shadow mb-4">
@@ -27,6 +25,8 @@
                         <tr>
                             <th>No</th>
                             <th>Nama Pelanggan</th>
+                            <th>Alamat</th>
+                            <th>No Telpon</th>
                             <th>Nama Kendaraan</th>
                             <th>Tanggal Sewa</th>
                             <th>Tanggal Akhir Sewa</th>
@@ -40,6 +40,8 @@
                         <tr>
                             <th>No</th>
                             <th>Nama Pelanggan</th>
+                            <th>Alamat</th>
+                            <th>No Telpon</th>
                             <th>Nama Kendaraan</th>
                             <th>Tanggal Sewa</th>
                             <th>Tanggal Akhir Sewa</th>
@@ -57,6 +59,8 @@
                             <tr>
                                 <td><?= $no++ ?></td>
                                 <td><?= $value->nama ?></td>
+                                <td><?= $value->alamat ?></td>
+                                <td><?= $value->no_hp ?></td>
                                 <td><?= $value->nama_kendaraan ?></td>
                                 <td><?= date('d-m-Y', strtotime($value->tglsewa_mulai)) ?></td>
                                 <td><?= date('d-m-Y', strtotime($value->tglsewa_akhir)) ?></td>
@@ -65,7 +69,7 @@
                                 <td><?= $value->keterangan ?></td>
                                 <?php if ($value->keterangan === 'Mobil Belum Diambil'): ?>
                                     <td>
-                                        <a href="javascript:void(0);" onclick="confirmAcc('<?= $value->id_transaksi ?>')" class="btn btn-success btn-sm">
+                                        <a href="javascript:void(0);" onclick="confirmAcc('<?= $value->id_transaksi ?>')" class="btn btn-primary btn-sm">
                                             Acc
                                         </a>
                                     </td>

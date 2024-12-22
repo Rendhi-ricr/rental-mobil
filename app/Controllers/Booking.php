@@ -59,6 +59,7 @@ class Booking extends BaseController
         $tglsewa_mulai = $this->request->getPost('tglsewa_mulai');
         $tglsewa_akhir = $this->request->getPost('tglsewa_akhir');
         $alamat = $this->request->getPost('alamat'); // Ambil alamat dari form input
+        $hp = $this->request->getPost('no_hp'); // Ambil alamat dari form input
         $denda = $this->request->getPost('denda'); // Ambil alamat dari form input
 
         // Ambil data kendaraan berdasarkan id_kendaraan
@@ -86,9 +87,27 @@ class Booking extends BaseController
         ]);
 
         // Update alamat user di tabel t_user
-        $this->user->update($id_user, ['alamat' => $alamat]);
+        $this->user->update(
+            $id_user,
+            [
+                'alamat' => $alamat,
+                'no_hp' => $hp
+            ]
+        );
 
         // Redirect dengan pesan sukses
         return redirect()->to('/home')->with('success', 'Harap Hubungi Admin Untuk Lebih Lanjut');
+    }
+
+    public function HistoriTransaksi()
+    {
+        // Ambil data transaksi terbaru dari model
+        $historitransaksi = $this->transaksi->TransaksiBerdasarkanUser();
+        // Kirim data ke view
+        return view('frontend/histori_transaksi', [
+            'htransaksi' => $historitransaksi,
+            'nama' => session()->get('nama')
+        ]);
+        // return view('frontend/', []);
     }
 }

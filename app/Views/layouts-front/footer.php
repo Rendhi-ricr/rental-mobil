@@ -1,4 +1,4 @@
-<footer class="bg-primary text-white text-center py-4">
+<footer class="mt-auto bg-primary text-white text-center py-4">
     <div class="container">
         <p class="mb-0">elha rent car</p>
         <small>

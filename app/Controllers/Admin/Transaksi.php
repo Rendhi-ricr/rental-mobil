@@ -4,7 +4,6 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use App\Models\TransaksiModels;
-use App\Models\HistoriTransaksiModels;
 
 class Transaksi extends BaseController
 {
@@ -14,13 +13,12 @@ class Transaksi extends BaseController
     public function __construct()
     {
         $this->transaksi = new TransaksiModels();
-        $this->histori = new HistoriTransaksiModels();
     }
 
     public function index()
     {
         // Ambil data transaksi terbaru dari model
-        $data['transaksi'] = $this->transaksi->getAll();
+        $data['transaksi'] = $this->transaksi->getAll(['Mobil Belum Diambil', 'Mobil Sudah Diambil']);
 
         // Kirim data ke view
         return view('admin/transaksi/index', $data);
@@ -38,7 +36,6 @@ class Transaksi extends BaseController
 
     public function selesaiTransaksi($id_transaksi)
     {
-
         // Ambil data transaksi berdasarkan id_transaksi
         $transaksi = $this->transaksi->find($id_transaksi);
 
@@ -53,21 +50,27 @@ class Transaksi extends BaseController
         $telatHari = ($diff > 0) ? floor($diff / (60 * 60 * 24)) : 0;
 
         // Hitung total denda
-        $dendaPerHari = $transaksi['denda']; // Pastikan kolom denda ada di tabel transaksi
+        $dendaPerHari = $transaksi['denda']; // Kolom denda harus ada di tabel transaksi
         $totalDenda = $telatHari * $dendaPerHari;
 
         // Masukkan data ke tabel_histori_transaksi
-        $historiData = [
-            'id_transaksi' => $transaksi['id_transaksi'],
+        $data = [
             'tanggal_dikembalikan' => $tanggalDikembalikan,
             'telat_hari' => $telatHari,
             'total_denda' => $totalDenda,
+            'keterangan' => "Transaksi Selesai",
         ];
-        $this->histori->insert($historiData);
+        $this->transaksi->update($id_transaksi, $data);
 
-        // Hapus data dari tabel transaksi
-        $this->transaksi->delete($id_transaksi);
+        return redirect()->back()->with('success', 'Transaksi Telah Diselesaikan');
+    }
 
-        return redirect()->back()->with('success', 'Transaksi berhasil diselesaikan dan dipindahkan ke histori!');
+    public function HTransaksi()
+    {
+        // Ambil data transaksi terbaru dari model
+        $data['transaksi'] = $this->transaksi->getAll(['Transaksi Selesai']);
+
+        // Kirim data ke view
+        return view('admin/transaksi/histori', $data);
     }
 }

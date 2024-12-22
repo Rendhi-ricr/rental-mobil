@@ -17,6 +17,10 @@
                     <label for="alamat" class="form-label">Alamat</label>
                     <textarea name="alamat" id="alamat" class="form-control" required></textarea>
                 </div>
+                <div class="mb-3">
+                    <label for="no_hp" class="form-label">Nomor Handphone</label>
+                    <input type="number" class="form-control" id="no_hp" name="no_hp">
+                </div>
                 <!-- Tanggal Mulai Sewa -->
                 <div class="mb-3">
                     <label for="startDate" class="form-label">Tanggal Mulai Sewa</label>

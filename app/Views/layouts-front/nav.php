@@ -15,21 +15,21 @@
                 <?php if (session()->get('isLoggedIn')): ?>
                     <!-- Menu untuk User yang Sudah Login -->
                     <li class="nav-item">
-                        <a class="nav-link" href="#tentang-kami">Tentang Kami</a>
+                        <a class="nav-link" href="<?= base_url('home') ?>">Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#daftar-mobil">Daftar Mobil</a>
+                        <a class="nav-link" href="<?= base_url('kendaraan') ?>">Daftar Mobil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#histori-transaksi">Histori Transaksi</a>
+                        <a class="nav-link" href="<?= base_url('booking/HistoriTransaksi') ?>">Histori Transaksi</a>
                     </li>
                 <?php else: ?>
                     <!-- Menu Default untuk User yang Belum Login -->
                     <li class="nav-item">
-                        <a class="nav-link" href="#tentang-kami">Tentang Kami</a>
+                        <a class="nav-link" href="<?= base_url('home') ?>">Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#daftar-mobil">Daftar Mobil</a>
+                        <a class="nav-link" href="<?= base_url('kendaraan') ?>">Daftar Mobil</a>
                     </li>
                 <?php endif; ?>
             </ul>

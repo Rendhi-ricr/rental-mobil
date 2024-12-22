@@ -55,7 +55,7 @@
             <span>Kelola Transaksi</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('admin/HistoriTransaksi') ?>">
+        <a class="nav-link" href="<?= base_url('admin/transaksi/HTransaksi') ?>">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Histori Transaksi</span></a>
     </li>
