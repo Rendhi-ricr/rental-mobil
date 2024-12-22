@@ -15,7 +15,7 @@
                 <!-- Alamat -->
                 <div class="mb-3">
                     <label for="alamat" class="form-label">Alamat</label>
-                    <textarea name="alamat" id="alamat" class="form-control"></textarea>
+                    <textarea name="alamat" id="alamat" class="form-control" required></textarea>
                 </div>
                 <!-- Tanggal Mulai Sewa -->
                 <div class="mb-3">
@@ -48,12 +48,12 @@
                 </div>
                 <!-- Denda -->
                 <div class="mb-3">
-                    <label for="penaltyFee" class="form-label">Denda</label>
+                    <label for="penaltyFee" class="form-label">Denda /Hari <small class="text-danger">*Denda aktif jika telat mengembalikan mobil dari perjanjian sebelumnya</small></label>
                     <input type="text" class="form-control" id="penaltyFee" name="denda" readonly>
                 </div>
                 <!-- Tombol Submit -->
                 <div class="d-grid">
-                    <button type="submit" class="btn btn-primary">Sewa Sekarang</button>
+                    <button type="button" id="btnSubmit" class="btn btn-primary">Sewa Sekarang</button>
                 </div>
             </form>
         </div>
@@ -131,11 +131,41 @@
             calculatePenalty();
         });
 
-        // Pastikan data yang dikirim adalah angka mentah
-        document.querySelector("form").addEventListener("submit", function() {
-            totalPrice.value = totalPrice.dataset.rawValue || 0; // Kirim nilai mentah
-            penaltyFee.value = penaltyFee.dataset.rawValue || 0; // Kirim nilai mentah
+        // Validasi sebelum submit
+        document.querySelector("form").addEventListener("submit", function(event) {
+            if (!penaltyFee.value || !totalPrice.value) {
+                event.preventDefault();
+                alert("Denda atau total harga belum dihitung. Pastikan data sudah lengkap.");
+            } else {
+                totalPrice.value = totalPrice.dataset.rawValue || 0; // Kirim nilai mentah
+                penaltyFee.value = penaltyFee.dataset.rawValue || 0; // Kirim nilai mentah
+            }
         });
+
+        // SweetAlert konfirmasi submit
+        const form = document.getElementById("formTransaksi");
+        const btnSubmit = document.getElementById("btnSubmit");
+
+        btnSubmit.addEventListener("click", function() {
+            Swal.fire({
+                title: 'Konfirmasi Transaksi',
+                text: "Apakah Anda yakin ingin menyewa mobil ini?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Sewa Sekarang!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Pastikan nilai mentah dikirim sebelum submit
+                    totalPrice.value = totalPrice.dataset.rawValue || 0;
+                    penaltyFee.value = penaltyFee.dataset.rawValue || 0;
+                    form.submit();
+                }
+            });
+        });
+
     });
 </script>
 <?= $this->endSection() ?>

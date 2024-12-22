@@ -9,6 +9,25 @@
             <?= session()->getFlashdata('welcome') ?>
         </div>
     <?php endif; ?>
+
+    <!-- Notification SweetAlert -->
+    <?php if (session()->getFlashdata('success')): ?>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    title: 'Berhasil!',
+                    text: '<?= session()->getFlashdata('success') ?>',
+                    icon: 'success',
+                    confirmButtonText: 'Hubungi WhatsApp',
+                    confirmButtonColor: '#3085d6',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = 'https://wa.me/6285222258509'; // Ganti dengan nomor WhatsApp Anda
+                    }
+                });
+            });
+        </script>
+    <?php endif; ?>
     <div class="container">
 
         <section class="container py-5">

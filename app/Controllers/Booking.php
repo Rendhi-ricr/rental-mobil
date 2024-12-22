@@ -81,7 +81,7 @@ class Booking extends BaseController
             'tglsewa_mulai' => $tglsewa_mulai,
             'tglsewa_akhir' => $tglsewa_akhir,
             'total_harga' => str_replace(['Rp', '.', ','], '', $total_harga),
-            'denda' => $denda,
+            'denda' => str_replace(['Rp', '.', ','], '', $denda),
             'keterangan' => 'Mobil Belum Diambil',
         ]);
 
@@ -89,6 +89,6 @@ class Booking extends BaseController
         $this->user->update($id_user, ['alamat' => $alamat]);
 
         // Redirect dengan pesan sukses
-        return redirect()->to('/home')->with('success', 'Data transaksi dan alamat berhasil disimpan.');
+        return redirect()->to('/home')->with('success', 'Harap Hubungi Admin Untuk Lebih Lanjut');
     }
 }
