@@ -60,7 +60,7 @@
                         </div>
                     </div>
                     <div class="card-footer text-right">
-                        <button type="submit" class="btn btn-primary">
+                        <button type="button" class="btn btn-primary" id="btnSubmit">
                             <i class="fa fa-save mr-2"></i>Update
                         </button>
                     </div>
@@ -69,4 +69,23 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('btnSubmit').addEventListener('click', function() {
+        Swal.fire({
+            title: 'Apakah Anda yakin akan mengubah data ini?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Submit form jika pengguna mengonfirmasi
+                document.querySelector('form').submit();
+            }
+        });
+    });
+</script>
 <?= $this->endSection() ?>

@@ -101,6 +101,6 @@ class User extends BaseController
         $this->user->delete_data($id_user);
 
         // mengakses halaman berita
-        return redirect()->to('admin/user');
+        return redirect()->to('admin/user')->with('success', 'Data user berhasil dihapus.');
     }
 }

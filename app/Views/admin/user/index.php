@@ -2,7 +2,11 @@
 <?= $this->section('title') ?>Kelola User<?= $this->endSection() ?>
 <?= $this->section('content') ?>
 <div class="container-fluid">
-
+    <?php if (session()->getFlashdata('success')): ?>
+        <div class="alert alert-success text-center" role="alert">
+            <?= session()->getFlashdata('success') ?>
+        </div>
+    <?php endif; ?>
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Kelola Data User</h1>
@@ -48,7 +52,9 @@
                                 <td><?= $u['alamat'] ?></td>
                                 <td>
                                     <a href="<?= base_url('admin/user/edit/' . $u['id_user']) ?>" class="btn btn-warning"><i class="fa fa-edit me-2"></i>Edit</a>
-                                    <a href="<?= base_url('admin/user/delete/' . $u['id_user']) ?>" class="btn btn-danger"><i class="fa fa-trash me-2"></i>Hapus</a>
+                                    <a href="javascript:void(0);" onclick="hapus('<?= $u['id_user'] ?>')" class="btn btn-danger">
+                                        <i class="fa fa-trash me-2"></i>Hapus
+                                    </a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -58,5 +64,23 @@
         </div>
     </div>
 </div>
+
+<script>
+    function hapus(id) {
+        Swal.fire({
+            title: 'Apakah Anda Yakin Menghapus Data User Ini?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Redirect ke URL aksi Acc
+                window.location.href = "<?= base_url('admin/user/delete/') ?>" + id;
+            }
+        })
+    }
+</script>
 
 <?= $this->endSection() ?>

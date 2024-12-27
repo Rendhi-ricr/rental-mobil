@@ -2,7 +2,11 @@
 <?= $this->section('title') ?>Kelola Mobil<?= $this->endSection() ?>
 <?= $this->section('content') ?>
 <div class="container-fluid">
-
+    <?php if (session()->getFlashdata('success')): ?>
+        <div class="alert alert-success text-center" role="alert">
+            <?= session()->getFlashdata('success') ?>
+        </div>
+    <?php endif; ?>
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Kelola Data Mobil</h1>
@@ -51,7 +55,9 @@
                                 <td><img src="<?= base_url('img/kendaraan/' . $m['gambar']) ?>" alt="Toyota Avanza" style="width: 200px; heigh:10px;"></td>
                                 <td>
                                     <a href="<?= base_url('admin/mobil/edit/' . $m['id_kendaraan']) ?>" class="btn btn-warning"><i class="fa fa-edit me-2"></i>Edit</a>
-                                    <a href="<?= base_url('admin/mobil/delete/' . $m['id_kendaraan']) ?>" class="btn btn-danger"><i class="fa fa-trash me-2"></i>Hapus</a>
+                                    <a href="javascript:void(0);" onclick="hapus('<?= $m['id_kendaraan'] ?>')" class="btn btn-danger">
+                                        <i class="fa fa-trash me-2"></i>Hapus
+                                    </a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -61,5 +67,23 @@
         </div>
     </div>
 </div>
+
+<script>
+    function hapus(id) {
+        Swal.fire({
+            title: 'Apakah Anda yakin Menghapus Data Kendaraan Ini?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Redirect ke URL aksi Acc
+                window.location.href = "<?= base_url('admin/mobil/delete/') ?>" + id;
+            }
+        })
+    }
+</script>
 
 <?= $this->endSection() ?>

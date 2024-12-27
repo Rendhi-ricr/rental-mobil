@@ -133,6 +133,6 @@ class Mobil extends BaseController
         $this->mobil->delete_data($id_kendaraan);
 
         // mengakses halaman berita
-        return redirect()->to('admin/mobil');
+        return redirect()->to('admin/mobil')->with('success', 'Data kendaraan berhasil dihapus');
     }
 }
