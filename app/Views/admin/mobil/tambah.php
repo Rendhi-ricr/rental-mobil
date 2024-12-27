@@ -56,6 +56,9 @@
                                 <option value="Mobil SUV">Mobil SUV</option>
                                 <option value="Mobil MPV">Mobil MPV</option>
                                 <option value="Mobil Crossover">Mobil Crossover</option>
+                                <option value="Mobil Jeep">Mobil Jeep</option>
+                                <option value="Mobil Sedan">Mobil Sedan</option>
+                                <option value="Mobil Hatchback">Mobil Hatchback</option>
                             </select>
                         </div>
                         <div class="form-group">

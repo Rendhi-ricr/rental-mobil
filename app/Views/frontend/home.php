@@ -39,7 +39,7 @@
                     </p>
                     <div class="mt-4">
                         <a href="#" class="btn btn-primary me-2">Hubungi Kami</a>
-                        <a href="#" class="btn btn-outline-primary">Mobil Kami</a>
+                        <a href="<?= base_url('kendaraan/index') ?>" class="btn btn-outline-primary">Mobil Kami</a>
                     </div>
                 </div>
                 <div class="col-md-6 text-center">
@@ -58,7 +58,7 @@
                 <?php foreach ($mobil as $m) : ?>
                     <div class="col-md-4 mb-4">
                         <div class="card text-center">
-                            <img src="<?= base_url('img/kendaraan/' . $m['gambar']) ?>" alt="<?= $m['nama_kendaraan'] ?>">
+                            <img src="<?= base_url('img/kendaraan/' . $m['gambar']) ?>" alt="<?= $m['nama_kendaraan'] ?>" class="card-img-top">
                             <div class="card-body">
                                 <h5 class="card-title fw-bold"><?= $m['nama_kendaraan']; ?></h5>
                                 <p class="text-primary fw-bold mb-1">Rp <?= number_format($m['harga_perhari'], 0, ',', '.'); ?><span class="text-muted fw-normal">/Hari</span></p>
@@ -74,10 +74,9 @@
                         </div>
                     </div>
                 <?php endforeach; ?>
-
-
             </div>
         </section>
+
 
 
     </div>

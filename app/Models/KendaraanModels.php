@@ -29,4 +29,14 @@ class KendaraanModels extends Model
         $query = $this->db->table($this->table)->delete(array('id_kendaraan' => $id_kendaraan));
         return $query;
     }
+
+    public function getTopKendaraan($limit = 3)
+    {
+        return $this->select('tabel_kendaraan.*, COUNT(tabel_transaksi.id_transaksi) AS total_transaksi')
+            ->join('tabel_transaksi', 'tabel_transaksi.id_kendaraan = tabel_kendaraan.id_kendaraan', 'left')
+            ->groupBy('tabel_kendaraan.id_kendaraan')
+            ->orderBy('total_transaksi', 'DESC')
+            ->limit($limit)
+            ->findAll();
+    }
 }

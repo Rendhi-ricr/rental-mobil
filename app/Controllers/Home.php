@@ -15,11 +15,14 @@ class Home extends BaseController
 
     public function index()
     {
-        $mobil = $this->mobil->findAll();
+        // Ambil 3 mobil dengan transaksi terbanyak
+        $mobilPopuler = $this->mobil->getTopKendaraan(3);
+
         $data = [
-            'mobil' => $mobil,
-            'isLoggedIn' => session()->has('id_user')
+            'mobil' => $mobilPopuler, // Hanya 3 mobil populer
+            'isLoggedIn' => session()->has('id_user'),
         ];
+
         return view('frontend/home', $data);
     }
 }
