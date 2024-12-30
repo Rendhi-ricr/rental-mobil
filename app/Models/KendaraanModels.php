@@ -36,7 +36,8 @@ class KendaraanModels extends Model
             ->join('tabel_transaksi', 'tabel_transaksi.id_kendaraan = tabel_kendaraan.id_kendaraan', 'left')
             ->groupBy('tabel_kendaraan.id_kendaraan')
             ->orderBy('total_transaksi', 'DESC')
-            ->limit($limit)
-            ->findAll();
+            ->limit((int) $limit)
+            ->get()
+            ->getResultArray();
     }
 }
