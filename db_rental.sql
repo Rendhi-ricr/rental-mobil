@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 23, 2024 at 02:22 AM
+-- Generation Time: Dec 27, 2024 at 08:43 AM
 -- Server version: 8.0.30
 -- PHP Version: 7.4.33
 
@@ -66,11 +66,16 @@ CREATE TABLE `tabel_kendaraan` (
 --
 
 INSERT INTO `tabel_kendaraan` (`id_kendaraan`, `nama_kendaraan`, `nomber_kendaraan`, `tipe_kendaraan`, `harga_perhari`, `gambar`) VALUES
-(3, 'Mitsubishi Pajero', 'B 1234 DA', 'SUV', '850000', '1733727212_07d5354b10672a81c418.webp'),
+(3, 'Mitsubishi Pajero', 'C 1920 GA', 'SUV', '850000', '1733727212_07d5354b10672a81c418.webp'),
 (4, 'Toyota Avanza', 'A 4567 DT', 'MVP', '500000', '1733727277_0edd76ee0fd5da8a60f9.jpg'),
 (5, 'Mitsubishi Xpander', 'T 8763 TR', 'MVP', '600000', '1733727328_4d60caa260e95cfaa13a.jpg'),
-(7, 'Daihatsu Xenia', 'C 1412 GA', 'MVP', '500000', '1733912146_3d1730c727beca48ed7a.jpg'),
-(12, 'fgbnmh', 'D 1956 AC', 'Mobil SUV', '1234567', '1734527338_83bbecd057bbc438332a.png');
+(14, 'Jeep Wrangler Rubicon', 'D 1992 AC', 'Mobil Jeep', '900000', '1735262428_7f2f52629d55745c9d75.jpg'),
+(15, 'Honda Brio', 'G 1872 AA', 'Mobil Hatchback', '500000', '1735262853_2e2a45aa2849a25a1c82.png'),
+(16, 'Honda Civic', 'D 1902 AU', 'Mobil Sedan', '1000000', '1735262880_db26be22b88e565b8230.png'),
+(17, 'Toyota Camry', 'C 1276 AB', 'Mobil Sedan', '2000000', '1735262914_383b3386f8aa45f73e9d.png'),
+(18, 'Mazda 3 Hatchback', 'T 5678 KA', 'Mobil Hatchback', '2500000', '1735262998_0ccc90add5876ad8aac9.png'),
+(19, 'Marcedes-Benz C 200', 'T 1402 XM', 'Mobil Sedan', '3500000', '1735263112_75a93b7505c2bc209620.png'),
+(20, 'BMW M3', 'B 2871 XA', 'Mobil Sedan', '5000000', '1735263212_8c9cdd79b2fceccd27b7.png');
 
 -- --------------------------------------------------------
 
@@ -99,7 +104,9 @@ CREATE TABLE `tabel_transaksi` (
 INSERT INTO `tabel_transaksi` (`id_transaksi`, `id_user`, `id_kendaraan`, `tglsewa_mulai`, `tglsewa_akhir`, `total_harga`, `denda`, `tanggal_dikembalikan`, `telat_hari`, `total_denda`, `keterangan`) VALUES
 (1, 5, 3, '2024-12-12', '2024-12-21', '8500000', '100000', '2024-12-22', '1', '100000', 'Transaksi Selesai'),
 (2, 8, 3, '2024-12-13', '2024-12-18', '5100000', '100000', '2024-12-22', '4', '400000', 'Transaksi Selesai'),
-(3, 8, 4, '2024-12-18', '2024-12-22', '2500000', '100000', '0000-00-00', '', '0', 'Mobil Sudah Diambil');
+(3, 8, 4, '2024-12-18', '2024-12-22', '2500000', '100000', '0000-00-00', '', '0', 'Mobil Sudah Diambil'),
+(4, 5, 14, '2024-12-27', '2024-12-31', '4500000', '100000', '0000-00-00', '', '0', 'Mobil Belum Diambil'),
+(5, 5, 14, '2024-12-13', '2024-12-21', '8100000', '100000', '0000-00-00', '', '0', 'Mobil Belum Diambil');
 
 -- --------------------------------------------------------
 
@@ -123,11 +130,8 @@ CREATE TABLE `tabel_user` (
 
 INSERT INTO `tabel_user` (`id_user`, `nama`, `email`, `no_hp`, `alamat`, `password`, `role`) VALUES
 (1, 'rendhi', 'rendhirichardo2@gmail.com', '081224210297', 'qwertyuio', '$2y$10$Y05YT/pflTqJqQ8.Utz5x.3cyIIQIEN0POiQSDYo92Oe/GuKhzHPm', 'admin'),
-(3, 'Nada Savana', 'admin123@gmail.com', '', '', '$2y$10$Iwn4f2Z4cH37ohP5nIVbFOvThfWlsVKhDqXzuQfJWkhBClhimxItG', 'admin'),
-(5, 'Siti Masitoh', 'sitim@gmail.com', '', 'oiuuyutyfghvb', '$2y$10$w2.tmd/KM2sHYZ9fqh4u.uoww610WTaKjehpuG053WrwhlhdxNGxS', 'pelanggan'),
-(6, 'Agus', 'agus@gmail.com', '', '', '$2y$10$Hi0o8p6pkD7C14TmzELGDeytTjYuw630VCjVcYBGzKc9ZdeoepzCK', 'pelanggan'),
-(7, 'Asep', 'asep@gmail.com', '', 'wertyui', '$2y$10$e9g2R/Xqcv7GEUIJXz1/qexhAS1pzYMG9t91MLq0uIxIp3L1HUwpm', ''),
-(8, 'Agung Pakmen', 'agung@example.com', '1908379183', 'aiuysugdhvbajkdshig', '$2y$10$umitaw54XQ5lZUiqsP.L7eyHG.lNSsfLr0NvjfgQNvizJkfMOuaj2', 'pelanggan');
+(5, 'Siti Masitoh', 'sitim@gmail.com', '5678976', 'yuipohgasvdjags', '$2y$10$w2.tmd/KM2sHYZ9fqh4u.uoww610WTaKjehpuG053WrwhlhdxNGxS', 'pelanggan'),
+(9, 'Binta', 'binta@example.com', '', '', '$2y$10$Q/8aWIuZdSafR7uFQ0goduYsmrlok63Xa63o7P5qCGV2hAaY9.TDa', 'admin');
 
 --
 -- Indexes for dumped tables
@@ -174,19 +178,19 @@ ALTER TABLE `tabel_histori_transaksi`
 -- AUTO_INCREMENT for table `tabel_kendaraan`
 --
 ALTER TABLE `tabel_kendaraan`
-  MODIFY `id_kendaraan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_kendaraan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `tabel_transaksi`
 --
 ALTER TABLE `tabel_transaksi`
-  MODIFY `id_transaksi` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_transaksi` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tabel_user`
 --
 ALTER TABLE `tabel_user`
-  MODIFY `id_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
